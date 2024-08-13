@@ -13,6 +13,9 @@
 // - llama3 LLM installed via Ollama
 // - all-minilm Embeddings model installed via Ollama
 
+// New stuff:
+// - Try RecursiveCharacterTextSplitter instead of CharacterTextSplitter
+
 /**
  * Simple RAG pipeline allowing you to "talk" to your documentation:
  * 
@@ -36,12 +39,12 @@ import { PDFLoader } from "@langchain/community/document_loaders/fs/pdf";
 import { RecursiveCharacterTextSplitter, CharacterTextSplitter } from "@langchain/textsplitters";
 import { Ollama, OllamaEmbeddings } from "@langchain/ollama";
 import { MemoryVectorStore } from "langchain/vectorstores/memory";
+import { RetrievalQAChain } from "langchain/chains";
 
 // 💡 Count the number of pages in the PDF
 // As you can see, we have a lot of documentation to sort through here!
 const docs = await new PDFLoader("./materials/pycharm-documentation.pdf").load();
 console.log(docs.length);
-process.exit();
 
 /**
  * @description Initializes the PdfQA class with the specified parameters.
@@ -55,22 +58,28 @@ process.exit();
  */
 class PdfQA {
 
-  constructor({ 
-    model, pdfDocument, chunkSize, chunkOverlap, searchType, kDocuments, chainType 
-  }) {
-    
-    async function init(){
-      // Load env: https://nodejs.org/en/blog/release/v20.6.0
-      this.initChatModel(model);
-      await this.loadDocuments(pdfDocument);
-      await this.splitDocuments({ chunkSize, chunkOverlap });
-      this.selectEmbedding = new OllamaEmbeddings({ model: "all-minilm:latest" });
-      await this.selectVectorStore();
-      this.createRetriever({ searchType, kDocuments });
-      this.chain = this.createChain(chainType);
-    }
+  constructor({ model, pdfDocument, chunkSize, chunkOverlap, searchType, kDocuments, chainType }) {
 
-    init();
+    this.model        = model;
+    this.pdfDocument  = pdfDocument;
+    this.chunkSize    = chunkSize;
+    this.chunkOverlap = chunkOverlap;
+    this.searchType   = searchType;
+    this.kDocuments   = kDocuments;
+    this.chainType    = chainType;
+
+  }
+
+  async init(){
+    // Load env: https://nodejs.org/en/blog/release/v20.6.0
+    this.initChatModel(this.model);
+    await this.loadDocuments(this.pdfDocument);
+    await this.splitDocuments({ chunkSize: this.chunkSize, chunkOverlap: this.chunkOverlap });
+    this.selectEmbedding = new OllamaEmbeddings({ model: "all-minilm:latest" });
+    await this.createVectorStore();
+    this.createRetriever({ searchType: this.searchType, kDocuments: this.kDocuments });
+    this.chain = await this.createChain(this.chainType);
+    return this;
   }
 
   /**
@@ -89,7 +98,7 @@ class PdfQA {
    */
   async loadDocuments({ pdfDocument }){
     console.log("Loading PDFs...");
-    const pdfLoader = new PDFLoader("./PDF/pycharm-documentation.pdf")
+    const pdfLoader = new PDFLoader(this.pdfDocument)
     this.documents = await pdfLoader.load();
   }
   
@@ -98,7 +107,11 @@ class PdfQA {
    */
   async splitDocuments({ chunkSize, chunkOverlap }){
     console.log("Splitting documents...");
-    const textSplitter = new CharacterTextSplitter({ chunkSize, chunkOverlap });
+    const textSplitter = new CharacterTextSplitter({ 
+      separator: " ",
+      chunkSize,
+      chunkOverlap 
+    });
     this.texts = await textSplitter.splitDocuments(this.documents);
   }
   
@@ -149,43 +162,38 @@ class PdfQA {
 /**
  * Let's instantiate our PDF questioner with the following values:
  */
-const pdfQa = new PdfQA({
+const pdfQa = await new PdfQA({
   model:       "llama3",
-  pdfDocument: "pycharm-documentation.pdf",
+  pdfDocument: "./materials/pycharm-documentation-mini.pdf",
   chunkSize:    1000,
   chunkOverlap: 0,
   searchType:   "similarity",
   kDocuments:   5,
   chainType:  "stuff",
-});
+}).init();
 
 const pdfQaChain = pdfQa.queryChain(); 
 
 // Let's try it out by asking how we can debug in PyCharm.
-const answer1 = await pdfQaChain.invoke({ query: "" });
-console.log( answer1.result );
-
-
-process.exit();
+const answer1 = await pdfQaChain.invoke({ query: "How do we add a custom file type in PyCharm?" });
+console.log( answer1 );
 
 // We can see the answer is very comprehensive. Let's have a look at the information it was based on from the documentation:
-for ( const document of answer1.sourceDocuments ){
-  console.log(answer1.sourceDocuments);
-  // const indexN = answer1.sourceDocuments
-}
+// for ( const document of answer1.sourceDocuments ){
+// }
 
 // We can see that the first three chunks are the most relevant, while the last three don't really add that much to the answer.
 // If we'd like, we can go a bit deeper with our answer. We can set up a memory for the last answer the LLM gave us so we can ask follow up questions. In this case, let's see if the LLM left out anything about PyCharm's debugging.
 
 const chatHistory1 = [ answer1.question, answer1.response ];
-const answer2 = pdfQaChain.invoke({ query: "", chatHistory: chatHistory1 });
-console.log(answer2.response);
+const answer2 = await pdfQaChain.invoke({ query: "Is there anything more to add here?", chatHistory: chatHistory1 });
+console.log(answer2.text);
 
 // If our model is capable of it, we can even enter queries in a different language to the source documentation, and get relevant answers back in this language. Here we question our English-language documentation in German ...
 
-const answer3 = pdfQaChain.invoke({ query: "Wie kann man PyCharm installieren?" });
+const answer3 = await pdfQaChain.invoke({ query: "Wie kann man PyCharm installieren?" });
 
 // ...and get a relevant answer in German!
-console.log( answer3.response );
+console.log( answer3.text );
 
 
