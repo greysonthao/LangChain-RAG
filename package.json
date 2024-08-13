@@ -19,6 +19,7 @@
   "homepage": "https://github.com/in-tech-gration/simple-rag-document-qa#readme",
   "dependencies": {
     "@langchain/community": "^0.2.27",
+    "@langchain/ollama": "^0.0.4",
     "pdf-parse": "^1.1.1"
   }
 }
