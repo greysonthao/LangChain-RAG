@@ -1,7 +1,7 @@
 # Simple RAG pipeline using `LangChain.js`
 
 This repository contains the JavaScript version of the python RAG implementation by **Jodie Burchell**
-as demoed in the [Beyond the Hype: A Realistic Look at Large Language Models](https://www.youtube.com/watch?v=Pv0cfsastFs) YouTube video.
+as demoed in her [Beyond the Hype: A Realistic Look at Large Language Models](https://www.youtube.com/watch?v=Pv0cfsastFs) GOTO 2024 presentation.
 
 - [Original repository](https://github.com/t-redactyl/simple-rag-document-qa) (Make sure to star)
 
