@@ -43,8 +43,9 @@ import { RetrievalQAChain } from "langchain/chains";
 
 // 💡 Count the number of pages in the PDF
 // As you can see, we have a lot of documentation to sort through here!
-const docs = await new PDFLoader("./materials/pycharm-documentation.pdf").load();
-console.log(docs.length);
+const pdfDocument = "./materials/pycharm-documentation-mini.pdf";
+const docs = await new PDFLoader(pdfDocument).load();
+console.log(`PDF Document has ${docs.length} number of pages.`);
 
 /**
  * @description Initializes the PdfQA class with the specified parameters.
@@ -164,7 +165,7 @@ class PdfQA {
  */
 const pdfQa = await new PdfQA({
   model:       "llama3",
-  pdfDocument: "./materials/pycharm-documentation-mini.pdf",
+  pdfDocument,
   chunkSize:    1000,
   chunkOverlap: 0,
   searchType:   "similarity",
@@ -176,7 +177,7 @@ const pdfQaChain = pdfQa.queryChain();
 
 // Let's try it out by asking how we can debug in PyCharm.
 const answer1 = await pdfQaChain.invoke({ query: "How do we add a custom file type in PyCharm?" });
-console.log( answer1 );
+console.log( "🤖", answer1.text, "\n" );
 
 // We can see the answer is very comprehensive. Let's have a look at the information it was based on from the documentation:
 // for ( const document of answer1.sourceDocuments ){
@@ -187,13 +188,13 @@ console.log( answer1 );
 
 const chatHistory1 = [ answer1.question, answer1.response ];
 const answer2 = await pdfQaChain.invoke({ query: "Is there anything more to add here?", chatHistory: chatHistory1 });
-console.log(answer2.text);
+console.log( "🤖", answer2.text, "\n" );
 
 // If our model is capable of it, we can even enter queries in a different language to the source documentation, and get relevant answers back in this language. Here we question our English-language documentation in German ...
 
 const answer3 = await pdfQaChain.invoke({ query: "Wie kann man PyCharm installieren?" });
 
 // ...and get a relevant answer in German!
-console.log( answer3.text );
+console.log( "🤖", answer3.text, "\n" );
 
 
