@@ -1,21 +1,3 @@
-// Original: https://github.com/t-redactyl/simple-rag-document-qa/tree/main
-// What differs (from the python version):
-// - NOT A Jupyter Notebook!
-// - MemoryVectorStore vs Chroma
-// - RecursiveCharacterTextSplitter vs CharacterSplitter
-// - Ollama vs OpenAI
-// - Claude vs OpenAI
-// - OllamaEmbeddings vs OpenAIEmbeddings
-// - kDocuments vs nDocuments
-
-// Prerequisites:
-// - Ollama installed on your system
-// - llama3 LLM installed via Ollama
-// - all-minilm Embeddings model installed via Ollama
-
-// New stuff:
-// - Try RecursiveCharacterTextSplitter instead of CharacterTextSplitter
-
 /**
  * Simple RAG pipeline allowing you to "talk" to your documentation:
  * 
