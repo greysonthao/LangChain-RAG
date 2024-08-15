@@ -192,7 +192,11 @@ console.log( "🤖", answer2.text, "\n" );
 
 // If our model is capable of it, we can even enter queries in a different language to the source documentation, and get relevant answers back in this language. Here we question our English-language documentation in German ...
 
-const answer3 = await pdfQaChain.invoke({ query: "Wie kann man PyCharm installieren?" });
+// Original question:
+// const question3 = "Wie kann man PyCharm installieren?"; 
+// Question tailored for mini version of the documentation:
+const question3 = "Wie fügt man einen benutzerdefinierten Dateityp in PyCharm hinzu?";
+const answer3 = await pdfQaChain.invoke({ query: question3 });
 
 // ...and get a relevant answer in German!
 console.log( "🤖", answer3.text, "\n" );
