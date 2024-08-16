@@ -111,7 +111,11 @@ class PdfQA {
    * @description Generate a chunk retriever for the given search type and number of documents.
    */
   createRetriever(){
-    this.retriever = this.db.asRetriever({ k: this.kDocuments, searchType: this.searchType });
+    console.log("Initialize vector store retriever...");
+    this.retriever = this.db.asRetriever({ 
+      k: this.kDocuments, 
+      searchType: this.searchType 
+    });
   }
   
   /**

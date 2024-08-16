@@ -66,10 +66,26 @@
   # of embeddings:  14
   ```
 
-## STEP 07: 
+## STEP 07: Configure a Vector store retriever
+
+  This component will search the vector store for relevant documents.
 
   - Source: `/step-by-step/step-07.js`
 
   - Run the code: `node step-07.js`
 
   - Output: 
+
+  ```
+  # of returned documents:  5
+  Search type:  similarity
+  ```
+
+## STEP 08: 
+
+  - Source: `/step-by-step/step-08.js`
+
+  - Run the code: `node step-08.js`
+
+  - Output: 
+

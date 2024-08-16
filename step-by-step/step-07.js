@@ -6,14 +6,15 @@ import path from "node:path";
 
 class PdfQA {
 
-  constructor({ model, pdfDocument, chunkSize, chunkOverlap, searchType, kDocuments }) {
+  // Add two more parameters for the Vector search. searchType configures the type of search, where the available values are 'similarity' or 'mmr' (see below). 
+  constructor({ model, pdfDocument, chunkSize, chunkOverlap, searchType = "similarity", kDocuments }) {
 
     this.model        = model;
     this.pdfDocument  = pdfDocument;
     this.chunkSize    = chunkSize;
     this.chunkOverlap = chunkOverlap;
 
-    // This configures the type of vector search. By default, Vector stores will use a 'similarity' search. Alternatively, you can pass in the "mms" value to searchType and perform a more advanced and precise search based on the 'Maximal Marginal Relevance' search algorithm.
+    // This configures the type of vector search. By default, Vector stores will use a 'similarity' search. Alternatively, you can pass in the "mmr" value to searchType and perform a more advanced and precise search based on the 'Maximal Marginal Relevance' search algorithm.
     // For more: https://js.langchain.com/v0.2/docs/integrations/vectorstores/memory/#maximal-marginal-relevance
     this.searchType   = searchType;
     // The number of relevant document to return based on the search query:
@@ -60,7 +61,11 @@ class PdfQA {
 
   // Method to perform a similarity search in the memory vector store. It calculates the similarity between the query vector and each vector in the store, sorts the results by similarity, and returns the top k results along with their scores.
   createRetriever(){
-
+    console.log("Initialize vector store retriever...");
+    this.retriever = this.db.asRetriever({ 
+      k: this.kDocuments,
+      searchType: this.searchType 
+    });
   }
 
 }
@@ -71,6 +76,10 @@ const pdfQa = await new PdfQA({
   model: "llama3", 
   pdfDocument,
   chunkSize: 1000,
-  chunkOverlap: 0 
+  chunkOverlap: 0,
+  searchType: "similarity",
+  kDocuments: 5 
 }).init();
 
+console.log("# of returned documents: ", pdfQa.retriever.k);
+console.log("Search type: ", pdfQa.retriever.searchType);
