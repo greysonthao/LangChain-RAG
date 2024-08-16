@@ -151,6 +151,11 @@
   Here are some extra optimizations and updates to the code from the previous step (10):
 
   - A new `temperature` parameter has been added to the class that configures the model's temperature.
+  - The `CharacterTextSplitter` has been replaced by the `RecursiveCharacterTextSplitter`.
+  
+  From the [docs](https://js.langchain.com/v0.1/docs/modules/data_connection/document_transformers/#get-started-with-text-splitters):
+
+  > "The recommended TextSplitter is the RecursiveCharacterTextSplitter. This will split documents recursively by different characters - starting with "\n\n", then "\n", then " ". This is nice because it will try to keep all the semantically relevant content in the same place for as long as possible." 
   
   - Source: `/step-by-step/extras-step-11.js`
 

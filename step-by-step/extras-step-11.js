@@ -1,6 +1,6 @@
 import { Ollama, OllamaEmbeddings } from "@langchain/ollama";
 import { PDFLoader } from "@langchain/community/document_loaders/fs/pdf";
-import { CharacterTextSplitter } from "@langchain/textsplitters";
+import { RecursiveCharacterTextSplitter } from "@langchain/textsplitters";
 import { MemoryVectorStore } from "langchain/vectorstores/memory";
 import path from "node:path";
 import { ChatPromptTemplate } from "@langchain/core/prompts";
@@ -50,7 +50,7 @@ class PdfQA {
 
   async splitDocuments(){
     console.log("Splitting documents...");
-    const textSplitter = new CharacterTextSplitter({ 
+    const textSplitter = new RecursiveCharacterTextSplitter({ 
       separator: " ",
       chunkSize: this.chunkSize,
       chunkOverlap: this.chunkOverlap 
