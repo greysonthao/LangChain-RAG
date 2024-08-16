@@ -132,3 +132,5 @@
 
   - Run the code: `node step-09.js`
 
+  - Output: you will get an answer along with the number of documents used as context to the LLM's response.
+
