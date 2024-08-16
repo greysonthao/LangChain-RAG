@@ -26,8 +26,9 @@ class PdfQA {
     console.log("Loading PDFs...");
     // Use the PDFLoader component provided by LangChain to load the PDF
     // Reference: https://js.langchain.com/v0.2/docs/integrations/document_loaders/file_loaders/pdf/
+
     const pdfLoader = new PDFLoader(path.join(import.meta.dirname,this.pdfDocument));
-    // By default, PDFLoader will split the PDF into multiple Documents. You can set the `splitPages` parameter to false to have one Document per PDF:
+    // By default, PDFLoader will create a Document object for each page. You can set the `splitPages` parameter to false to have one Document per PDF:
     // new PDFLoader( <PATH>, { splitPages: false });
     this.documents = await pdfLoader.load();
   }

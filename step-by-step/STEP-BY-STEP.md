@@ -37,3 +37,26 @@
 
   - Output: `The capital of Zimbabwe is Harare.`
   
+## STEP 04: Load PDF Document
+
+  - Source: `/step-by-step/step-04.js`
+
+  - Run the code: `node step-04.js`
+
+  - Output: the number of documents created from the PDF `pycharm-documentation-mini.pdf` should be 9 according to the default PDFLoader settings. You should also be able to see the text content of the first Document created from the PDF along with the accompanying metadata.
+
+## STEP 05: Split the Documents created by the PDFLoader into small chunks
+
+  - Source: `/step-by-step/step-05.js`
+
+  - Run the code: `node step-05.js`
+
+  - Output: according to the provided `chunkSize` (1000) and `chunkOverlap` (0) settings, you will get 14 text chunks from the text splitter.
+
+## STEP 06: 
+
+  - Source: `/step-by-step/step-06.js`
+
+  - Run the code: `node step-06.js`
+
+  - Output: 

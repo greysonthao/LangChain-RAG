@@ -59,7 +59,7 @@ class PdfQA {
     // Load env: https://nodejs.org/en/blog/release/v20.6.0
     this.initChatModel();
     await this.loadDocuments(this.pdfDocument);
-    await this.splitDocuments({ chunkSize: this.chunkSize, chunkOverlap: this.chunkOverlap });
+    await this.splitDocuments();
     this.selectEmbedding = new OllamaEmbeddings({ model: "all-minilm:latest" });
     await this.createVectorStore();
     this.createRetriever({ searchType: this.searchType, kDocuments: this.kDocuments });
@@ -88,12 +88,12 @@ class PdfQA {
   /**
    * @description Split the documents into chunks of a given size with a specified overlap.
    */
-  async splitDocuments({ chunkSize, chunkOverlap }){
+  async splitDocuments(){
     console.log("Splitting documents...");
     const textSplitter = new CharacterTextSplitter({ 
       separator: " ",
-      chunkSize,
-      chunkOverlap 
+      chunkSize: this.chunkSize,
+      chunkOverlap: this.chunkOverlap 
     });
     this.texts = await textSplitter.splitDocuments(this.documents);
   }
