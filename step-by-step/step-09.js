@@ -112,8 +112,6 @@ const pdfQa = await new PdfQA({
 
 const pdfQaChain = pdfQa.queryChain();
 
-console.log(process.env.CLAUDE_API_KEY);
-
 // Let's try it out by asking how we can debug in PyCharm.
 // const answer1 = await pdfQaChain.invoke({ query: "How do we add a custom file type in PyCharm?" });
 // console.log( "🤖", answer1.text, "\n" );
