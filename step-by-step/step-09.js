@@ -76,7 +76,7 @@ class PdfQA {
     // Replace with suggested code: https://v02.api.js.langchain.com/classes/langchain.chains.RetrievalQAChain.html
 
     // We are using a custom Chat Prompt Template for this one, so that the LLM has a context provided along with our query
-    const prompt = ChatPromptTemplate.fromTemplate(`Answer the user's question: {query} based on the following context {context}`);
+    const prompt = ChatPromptTemplate.fromTemplate(`Answer the user's question: {input} based on the following context {context}`);
 
     // Creates a chain that passes a list of documents to a model
     const combineDocsChain = await createStuffDocumentsChain({
@@ -113,5 +113,6 @@ const pdfQa = await new PdfQA({
 const pdfQaChain = pdfQa.queryChain();
 
 // Let's try it out by asking how we can debug in PyCharm.
-// const answer1 = await pdfQaChain.invoke({ query: "How do we add a custom file type in PyCharm?" });
-// console.log( "🤖", answer1.text, "\n" );
+const answer1 = await pdfQaChain.invoke({ input: "How do we add a custom file type in PyCharm?" });
+console.log( "🤖", answer1.answer, "\n" );
+console.log( "# of documents used as context: ", answer1.context.length, "\n" );
