@@ -53,10 +53,23 @@
 
   - Output: according to the provided `chunkSize` (1000) and `chunkOverlap` (0) settings, you will get 14 text chunks from the text splitter.
 
-## STEP 06: 
+## STEP 06: Vectorize the (split) Documents and add them to the Vector Store
 
   - Source: `/step-by-step/step-06.js`
 
   - Run the code: `node step-06.js`
+
+  - Output:
+
+  ```
+  Embeddings model:  all-minilm:latest
+  # of embeddings:  14
+  ```
+
+## STEP 07: 
+
+  - Source: `/step-by-step/step-07.js`
+
+  - Run the code: `node step-07.js`
 
   - Output: 
