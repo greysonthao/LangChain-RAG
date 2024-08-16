@@ -83,3 +83,7 @@ const pdfQa = await new PdfQA({
 
 console.log("# of returned documents: ", pdfQa.retriever.k);
 console.log("Search type: ", pdfQa.retriever.searchType);
+
+// We can also access the retriever directly through the object and invoke a search through the vector store to find relevant documents.
+// const relevantDocuments = await pdfQa.retriever.invoke("What can you do with AI Assistant?");
+// console.log( relevantDocuments );
