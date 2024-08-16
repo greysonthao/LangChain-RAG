@@ -69,7 +69,6 @@ class PdfQA {
 
   /**
    * @description Initialize the chat model.
-   * @param model: The name or path of the model to be loaded.
    * @returns void
    */
   initChatModel(){
@@ -79,9 +78,8 @@ class PdfQA {
 
   /**
    * @description Load documents from a PDF file and convert to a format that can be ingested by the langchain document splitter.
-   * @param pdfDocument
    */
-  async loadDocuments({ pdfDocument }){
+  async loadDocuments(){
     console.log("Loading PDFs...");
     const pdfLoader = new PDFLoader(path.join(import.meta.dirname,this.pdfDocument))
     this.documents = await pdfLoader.load();
