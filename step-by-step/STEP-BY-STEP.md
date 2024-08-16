@@ -134,3 +134,8 @@
 
   - Output: you will get an answer along with the number of documents used as context to the LLM's response.
 
+## STEP 10: Set up memory and use last answer to ask follow up questions / Ask in german
+
+  - Source: `/step-by-step/step-10.js`
+
+  - Run the code: `node step-10.js`
