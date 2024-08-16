@@ -27,6 +27,10 @@ To ensure that you have successfully downloaded and installed all of the above, 
 
 - The original code used the `CharacterSplitter` for splitting the PDF documents, whereas this repo contains a variation using the `RecursiveCharacterTextSplitter`.
 
+- The original repo contains a large PDF (pycharm-documentation.pdf which is around 174MB) that is used in the demo. This is a great source to test and also compare the results with the demo, but it turns out that it takes quite a lot of time to get vectorized. For testing purposes and making the process faster of vectorizing faster, especially in the case of the In-memory vector database which gets deleted every time the program gets restarted, a second smaller version of the original file has been added to the `/materials` folder. The file is called `pycharm-documentation-mini.pdf`, it's just 743KB and contains the first 10 pages of the original PDF. 
+
+- Another PDF has been added for further testing. The file can be found in the `/materials` folder and it's named `MetaPrivacyPolicy.pdf`. It's around 4MB and contains the Meta's privacy policy as of 2024.
+
 ## Usage
 
 - `git clone https://github.com/in-tech-gration/simple-rag-document-qa.git`
