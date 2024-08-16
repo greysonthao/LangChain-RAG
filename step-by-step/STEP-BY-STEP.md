@@ -18,6 +18,9 @@
 
   - Source: `/step-by-step/step-02.js`
 
+  - Install dependencies: `npm install`
+    - `Ollama`
+
   - Run the code: `node step-02.js`
 
   - Output: 
@@ -41,6 +44,9 @@
 
   - Source: `/step-by-step/step-04.js`
 
+  - Install dependencies: `npm install`
+    - `PDFLoader`
+
   - Run the code: `node step-04.js`
 
   - Output: the number of documents created from the PDF `pycharm-documentation-mini.pdf` should be 9 according to the default PDFLoader settings. You should also be able to see the text content of the first Document created from the PDF along with the accompanying metadata.
@@ -49,6 +55,10 @@
 
   - Source: `/step-by-step/step-05.js`
 
+  - Install dependencies: `npm install`
+    - `CharacterTextSplitter`
+    - `path`
+
   - Run the code: `node step-05.js`
 
   - Output: according to the provided `chunkSize` (1000) and `chunkOverlap` (0) settings, you will get 14 text chunks from the text splitter.
@@ -56,6 +66,11 @@
 ## STEP 06: Vectorize the (split) Documents and add them to the Vector Store
 
   - Source: `/step-by-step/step-06.js`
+
+  - Install dependencies: `npm install`
+    - `MemoryVectorStore`
+    - `CharacterTextSplitter`
+    - `OllamaEmbeddings`
 
   - Run the code: `node step-06.js`
 
@@ -85,6 +100,9 @@
 
   - Source: `/step-by-step/step-08.js`
 
+  - Install dependencies: `npm install`
+    - `RetrievalQAChain`
+
   - Run the code: `node step-08.js`
 
   - Output: The output should be a relevant response according to the documentation. For example something like this:
@@ -100,3 +118,17 @@
   ```
 
 ## STEP 09: Replacing legacy RetrievalQAChain
+
+  According to the official documentation, the legacy `RetrievalQAChain` class is deprecated as of version 2.x and will be completely removed in the upcoming 3.x version.
+
+  The API reference provides an alternative. In this step, we replace the `RetrievalQAChain` with the proposed setup. Here is the [reference link](https://v02.api.js.langchain.com/classes/langchain.chains.RetrievalQAChain.html) that contains the suggested refactoring.
+
+  - Source: `/step-by-step/step-09.js`
+
+  - Install dependencies: `npm install`
+    - `ChatPromptTemplate`
+    - `createStuffDocumentsChain`
+    - `createRetrievalChain`
+
+  - Run the code: `node step-09.js`
+
