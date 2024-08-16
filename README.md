@@ -31,6 +31,8 @@ To ensure that you have successfully downloaded and installed all of the above, 
 
 - Another PDF has been added for further testing. The file can be found in the `/materials` folder and it's named `MetaPrivacyPolicy.pdf`. It's around 4MB and contains the Meta's privacy policy as of 2024.
 
+- Since both the `RetrievalQAChain` (JavaScript version) and `RetrievalQA` (Python version) have been deprecated in the latest versions of LangChain, the final version of the code contains a different implementation that makes it up-to-date and in accordance with the latest specs. Nevertheless, an example using `RetrievalQAChain` can still be found in this repo for an easy comparison between the JS and the Python code as demoed by Jodie Burchell in her presentation.
+
 ## Usage
 
 - `git clone https://github.com/in-tech-gration/simple-rag-document-qa.git`
