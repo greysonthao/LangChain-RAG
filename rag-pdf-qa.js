@@ -18,7 +18,7 @@
 
 // Imports
 import { PDFLoader } from "@langchain/community/document_loaders/fs/pdf";
-import { RecursiveCharacterTextSplitter, CharacterTextSplitter } from "@langchain/textsplitters";
+import { CharacterTextSplitter } from "@langchain/textsplitters";
 import { Ollama, OllamaEmbeddings } from "@langchain/ollama";
 import { MemoryVectorStore } from "langchain/vectorstores/memory";
 import { RetrievalQAChain } from "langchain/chains";
@@ -55,7 +55,7 @@ class PdfQA {
 
   async init(){
     // Load env: https://nodejs.org/en/blog/release/v20.6.0
-    this.initChatModel(this.model);
+    this.initChatModel();
     await this.loadDocuments(this.pdfDocument);
     await this.splitDocuments({ chunkSize: this.chunkSize, chunkOverlap: this.chunkOverlap });
     this.selectEmbedding = new OllamaEmbeddings({ model: "all-minilm:latest" });
@@ -70,9 +70,9 @@ class PdfQA {
    * @param model: The name or path of the model to be loaded.
    * @returns void
    */
-  initChatModel({ model }){
+  initChatModel(){
     console.log("Loading model...");
-    this.llm = new Ollama({ model });
+    this.llm = new Ollama({ model: this.model });
   }
 
   /**
