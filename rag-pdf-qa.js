@@ -22,11 +22,13 @@ import { CharacterTextSplitter } from "@langchain/textsplitters";
 import { Ollama, OllamaEmbeddings } from "@langchain/ollama";
 import { MemoryVectorStore } from "langchain/vectorstores/memory";
 import { RetrievalQAChain } from "langchain/chains";
+import path from "node:path";
 
 // 💡 Count the number of pages in the PDF
 // As you can see, we have a lot of documentation to sort through here!
 const pdfDocument = "./materials/pycharm-documentation-mini.pdf";
-const docs = await new PDFLoader(pdfDocument).load();
+// console.log(import.meta.dirname, import.meta.filename);
+const docs = await new PDFLoader(path.join(import.meta.dirname, pdfDocument)).load();
 console.log(`PDF Document has ${docs.length} number of pages.`);
 
 /**
@@ -81,7 +83,7 @@ class PdfQA {
    */
   async loadDocuments({ pdfDocument }){
     console.log("Loading PDFs...");
-    const pdfLoader = new PDFLoader(this.pdfDocument)
+    const pdfLoader = new PDFLoader(path.join(import.meta.dirname,this.pdfDocument))
     this.documents = await pdfLoader.load();
   }
   
