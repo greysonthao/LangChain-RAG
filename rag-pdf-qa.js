@@ -43,7 +43,7 @@ console.log(`PDF Document has ${docs.length} number of pages.`);
  */
 class PdfQA {
 
-  constructor({ model, pdfDocument, chunkSize, chunkOverlap, searchType = "similarity", kDocuments, chainType }) {
+  constructor({ model, pdfDocument, chunkSize, chunkOverlap, searchType = "similarity", kDocuments }) {
 
     this.model        = model;
     this.pdfDocument  = pdfDocument;
@@ -51,7 +51,6 @@ class PdfQA {
     this.chunkOverlap = chunkOverlap;
     this.searchType   = searchType;
     this.kDocuments   = kDocuments;
-    this.chainType    = chainType;
 
   }
 
@@ -64,7 +63,7 @@ class PdfQA {
     this.selectEmbedding = new OllamaEmbeddings({ model: "all-minilm:latest" });
     await this.createVectorStore();
     this.createRetriever();
-    this.chain = await this.createChain(this.chainType);
+    this.chain = await this.createChain();
     return this;
   }
 
@@ -121,8 +120,7 @@ class PdfQA {
   /**
    * @description
    */
-  async createChain({ chainType }){
-    // chainType?
+  async createChain(){
     const chain = RetrievalQAChain.fromLLM(this.llm, this.retriever);
     return chain;
   }
