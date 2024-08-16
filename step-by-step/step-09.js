@@ -79,12 +79,16 @@ class PdfQA {
     const prompt = ChatPromptTemplate.fromTemplate(`Answer the user's question: {input} based on the following context {context}`);
 
     // Creates a chain that passes a list of documents to a model
+    // Ref: https://v02.api.js.langchain.com/functions/langchain.chains_combine_documents.createStuffDocumentsChain.html
+    // Source: https://github.com/langchain-ai/langchainjs/blob/3d2aabac1fa876ed908cd751d9afb448692ebbb3/langchain/src/chains/combine_documents/stuff.ts
     const combineDocsChain = await createStuffDocumentsChain({
       llm: this.llm,
       prompt,
     });
 
     // Create a retrieval chain that retrieves documents and then passes them on
+    // Ref: https://v02.api.js.langchain.com/functions/langchain.chains_retrieval.createRetrievalChain.html
+    // Source: https://github.com/langchain-ai/langchainjs/blob/3d2aabac1fa876ed908cd751d9afb448692ebbb3/langchain/src/chains/retrieval.ts#L73
     const chain = await createRetrievalChain({
       combineDocsChain,
       retriever: this.retriever,
