@@ -81,11 +81,22 @@
   Search type:  similarity
   ```
 
-## STEP 08: 
+## STEP 08: Create the query => search => results Chain:
 
   - Source: `/step-by-step/step-08.js`
 
   - Run the code: `node step-08.js`
 
-  - Output: 
+  - Output: The output should be a relevant response according to the documentation. For example something like this:
 
+  ```
+  🤖 According to the context, you can add a custom file type association in PyCharm by:
+
+  1. Pressing ⌘Сmd to open the IDE settings and then selecting Editor | File Types.
+  2. In the Recognized File Types list, selecting the file type that you want to associate with other filename patterns.
+  3. Using the File name patterns section to make the necessary changes, which can include adding a new pattern (), removing an existing one (), or modifying an existing pattern ().
+
+  Additionally, if PyCharm cannot identify the type of the file you are trying to open or create, it will display the Register New File Type Association dialog where you can choose how to process the file.   
+  ```
+
+## STEP 09: Replacing legacy RetrievalQAChain

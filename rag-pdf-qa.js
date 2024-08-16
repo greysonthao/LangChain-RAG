@@ -58,7 +58,7 @@ class PdfQA {
     // Load env: https://nodejs.org/en/blog/release/v20.6.0
     // https://nodejs.org/en/learn/command-line/how-to-read-environment-variables-from-nodejs
     this.initChatModel();
-    await this.loadDocuments(this.pdfDocument);
+    await this.loadDocuments();
     await this.splitDocuments();
     this.selectEmbedding = new OllamaEmbeddings({ model: "all-minilm:latest" });
     await this.createVectorStore();
@@ -121,6 +121,7 @@ class PdfQA {
    * @description
    */
   async createChain(){
+    console.log("Creating Retrieval QA Chain...");
     const chain = RetrievalQAChain.fromLLM(this.llm, this.retriever);
     return chain;
   }
