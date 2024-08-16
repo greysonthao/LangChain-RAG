@@ -9,15 +9,16 @@ import { createRetrievalChain } from "langchain/chains/retrieval";
 
 class PdfQA {
 
-  constructor({ model, pdfDocument, chunkSize, chunkOverlap, searchType = "similarity", kDocuments }) {
+  // Add an extra temperature parameter for setting a custom temperature for the model
+  constructor({ model, pdfDocument, chunkSize, chunkOverlap, searchType = "similarity", kDocuments, temperature = 0.8 }) {
 
     this.model        = model;
     this.pdfDocument  = pdfDocument;
     this.chunkSize    = chunkSize;
     this.chunkOverlap = chunkOverlap;
-
     this.searchType   = searchType;
     this.kDocuments   = kDocuments;
+    this.temperature  = temperature;
 
   }
 
@@ -34,7 +35,11 @@ class PdfQA {
 
   initChatModel(){
     console.log("Loading model...");
-    this.llm = new Ollama({ model: this.model });
+    this.llm = new Ollama({ 
+      model: this.model,
+      // We are passing either the default (0.8) or custom temperature value here:
+      temperature: this.temperature 
+    });
   }
 
   async loadDocuments(){
@@ -99,38 +104,15 @@ const pdfQa = await new PdfQA({
   chunkSize: 1000,
   chunkOverlap: 0,
   searchType: "similarity",
-  kDocuments: 5 
+  kDocuments: 5,
+  // This time we can pass an extra parameter for the model's temperature
+  // Learn more about temperature here: https://www.youtube.com/watch?v=q4ks_aUgGT4
+  temperature: 0 // 0 is the strictest mode
 }).init();
 
 const pdfQaChain = pdfQa.queryChain();
 
-// Let's try it out by asking how we can debug in PyCharm.
 const answer1 = await pdfQaChain.invoke({ input: "How do we add a custom file type in PyCharm?" });
-// console.log( "🤖", answer1.answer, "\n" );
-console.log( "# of documents used as context: ", answer1.context.length, "\n" );
+console.log( "🤖", answer1.answer, "\n" );
+// console.log( "# of documents used as context: ", answer1.context.length, "\n" );
 
-// Let's have a look at the information it was based on from the documentation
-for ( const document of answer1.context ){
-  const index = answer1.context.findIndex(doc => doc === document);
-  console.log(`\n 📄 DOCUMENT: No${index+1}`);
-  console.log(document.pageContent.trim(), "\n");
-}
-
-// We store the previous question along with its answer in an array:
-const chatHistory1 = [ answer1.input, answer1.answer ];
-// The createRetrievalChain part of the chain, allows us to pass an optional chat_history argument containing extra context. This will be used to give us a more relevant result since it acts as a kind of short memory to our LLM  
-const answer2 = await pdfQaChain.invoke({ 
-  input: "Is there anything more to add here?", 
-  chat_history: chatHistory1 
-});
-
-console.log( "🤖", answer2.answer, "\n" );
-
-// Original question:
-// const question3 = "Wie kann man PyCharm installieren?"; 
-// Question tailored for mini version of the documentation:
-const question3 = "Wie fügt man einen benutzerdefinierten Dateityp in PyCharm hinzu?";
-const answer3 = await pdfQaChain.invoke({ input: question3 });
-
-// ...and get a relevant answer in German!
-console.log( "🤖", question3, "\n", answer3.answer, "\n" );

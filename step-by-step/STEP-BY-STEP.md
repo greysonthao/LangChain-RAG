@@ -136,6 +136,22 @@
 
 ## STEP 10: Set up memory and use last answer to ask follow up questions / Ask in german
 
+  We set up a short-term memory so that the retriever can get some extra content the next time we ask a question. The previous question and related response is passed as context.
+
+  Also, we are looping through the relevant documents that were found through the retriever and ask a question in german.
+
   - Source: `/step-by-step/step-10.js`
 
   - Run the code: `node step-10.js`
+
+# Extras
+
+## STEP 11: Optimizations
+
+  Here are some extra optimizations and updates to the code from the previous step (10):
+
+  - A new `temperature` parameter has been added to the class that configures the model's temperature.
+  
+  - Source: `/step-by-step/extras-step-11.js`
+
+  - Run the code: `node step-11.js`
