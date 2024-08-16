@@ -43,7 +43,7 @@ console.log(`PDF Document has ${docs.length} number of pages.`);
  */
 class PdfQA {
 
-  constructor({ model, pdfDocument, chunkSize, chunkOverlap, searchType, kDocuments, chainType }) {
+  constructor({ model, pdfDocument, chunkSize, chunkOverlap, searchType = "similarity", kDocuments, chainType }) {
 
     this.model        = model;
     this.pdfDocument  = pdfDocument;
@@ -57,12 +57,13 @@ class PdfQA {
 
   async init(){
     // Load env: https://nodejs.org/en/blog/release/v20.6.0
+    // https://nodejs.org/en/learn/command-line/how-to-read-environment-variables-from-nodejs
     this.initChatModel();
     await this.loadDocuments(this.pdfDocument);
     await this.splitDocuments();
     this.selectEmbedding = new OllamaEmbeddings({ model: "all-minilm:latest" });
     await this.createVectorStore();
-    this.createRetriever({ searchType: this.searchType, kDocuments: this.kDocuments });
+    this.createRetriever();
     this.chain = await this.createChain(this.chainType);
     return this;
   }
@@ -109,9 +110,8 @@ class PdfQA {
   /**
    * @description Generate a chunk retriever for the given search type and number of documents.
    */
-  createRetriever({ searchType, kDocuments }){
-    // searchType? (Chroma)
-    this.retriever = this.db.asRetriever(kDocuments);
+  createRetriever(){
+    this.retriever = this.db.asRetriever({ k: this.kDocuments, searchType: this.searchType });
   }
   
   /**
