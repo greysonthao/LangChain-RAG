@@ -65,6 +65,10 @@
 
 ## STEP 06: Vectorize the (split) Documents and add them to the Vector Store
 
+  In this step we turn every document into a vector and store it in our in-memory vector store.
+
+  We can also directly query the vector store and find relevant documents based on some input.
+
   - Source: `/step-by-step/step-06.js`
 
   - Install dependencies: `npm install`
@@ -79,6 +83,22 @@
   ```
   Embeddings model:  all-minilm:latest
   # of embeddings:  14
+
+  Document pages related to our query:
+  * {"pageNumber":3,"lines":{"from":40,"to":45}}
+  * {"pageNumber":6,"lines":{"from":1,"to":17}}
+
+  Document pages and their score related to our query:
+  * [SIM=0.592] [Page number: 3]
+  * [SIM=0.581] [Page number: 6]
+  * [SIM=0.580] [Page number: 7]
+  * [SIM=0.570] [Page number: 5]
+  * [SIM=0.561] [Page number: 8]
+  * [SIM=0.507] [Page number: 7]
+  * [SIM=0.487] [Page number: 3]
+  * [SIM=0.424] [Page number: 4]
+  * [SIM=0.405] [Page number: 6]
+  * [SIM=0.378] [Page number: 9]
   ```
 
 ## STEP 07: Configure a Vector store retriever

@@ -68,3 +68,19 @@ const pdfQa = await new PdfQA({
 
 console.log( "Embeddings model: ", pdfQa.db.embeddings.model ); // all-minilm:latest
 console.log( "# of embeddings: ", pdfQa.db.memoryVectors.length ); // 14 
+
+// Query the Vector store directly: https://js.langchain.com/v0.2/docs/integrations/vectorstores/memory/#query-directly
+const similaritySearchResults = await pdfQa.db.similaritySearch("File type associations",2);
+console.log("\nDocument pages related to our query:");
+for (const doc of similaritySearchResults) {
+  console.log(`\n* ${JSON.stringify(doc.metadata.loc, null)}\n`);
+  // console.log(doc.pageContent);
+}
+
+// If you want to execute a similarity search and receive the corresponding scores you can run:
+const similaritySearchWithScoreResults = await pdfQa.db.similaritySearchWithScore("File type associations", 10);
+
+console.log("Document pages and their score related to our query:");
+for (const [doc, score] of similaritySearchWithScoreResults) {
+  console.log(`* [SIM=${score.toFixed(3)}] [Page number: ${doc.metadata.loc.pageNumber}]`);
+}
