@@ -81,7 +81,7 @@ class PdfQA {
    */
   async loadDocuments(){
     console.log("Loading PDFs...");
-    const pdfLoader = new PDFLoader(path.join(import.meta.dirname,this.pdfDocument))
+    const pdfLoader = new PDFLoader(path.join(import.meta.dirname,this.pdfDocument));
     this.documents = await pdfLoader.load();
   }
   
@@ -154,8 +154,7 @@ const pdfQa = await new PdfQA({
   chunkSize:    1000,
   chunkOverlap: 0,
   searchType:   "similarity",
-  kDocuments:   5,
-  chainType:  "stuff",
+  kDocuments:   5
 }).init();
 
 const pdfQaChain = pdfQa.queryChain(); 
