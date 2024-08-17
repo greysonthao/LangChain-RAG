@@ -4,6 +4,7 @@ import path from "node:path";
 
 class PdfQA {
 
+  // We need to add a new parameter (pdfDocument) to pass the PDF document pathname:
   constructor({ model, pdfDocument }) {
     this.model = model;
     this.pdfDocument = pdfDocument;
