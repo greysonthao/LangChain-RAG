@@ -51,7 +51,6 @@ class PdfQA {
   async splitDocuments(){
     console.log("Splitting documents...");
     const textSplitter = new RecursiveCharacterTextSplitter({ 
-      separator: " ",
       chunkSize: this.chunkSize,
       chunkOverlap: this.chunkOverlap 
     });
