@@ -39,7 +39,8 @@ class PdfQA {
     // https://js.langchain.com/v0.1/docs/modules/data_connection/document_transformers/#get-started-with-text-splitters
     const textSplitter = new CharacterTextSplitter({ 
       separator: " ",
-      chunkSize: this.chunkSize,
+      chunkSize: this.chunkSize, // Chunk size is measured by the number of characters
+      // See: https://chunkviz.up.railway.app/
       chunkOverlap: this.chunkOverlap 
     });
     this.texts = await textSplitter.splitDocuments(this.documents);
