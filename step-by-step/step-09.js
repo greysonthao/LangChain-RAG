@@ -95,6 +95,16 @@ class PdfQA {
       retriever: this.retriever,
     });
 
+    // A rough overview of the final `chain` flow:
+    // 1) chain gets triggered by `chain.invoke({ input: "... "})` 
+    // 2) A retriever is set in place according to the value passed to the `retriever` property of `createRetrievalChain()`
+    // 3) The retriever retrieves the relevant Document objects as an Array: [ Document {}, Document {}, Document {} ]
+    // 4) This array of documents is passed through to the next chain link through a context variable: { context: [ Document {}, Document {}, ... ], input, ... }
+    // 5) The next link is part of the combineDocsChain, which converts the array of documents found in the context property to a large string: { context: [ Document {}, Document {}, ...] } => { context: String }
+    // 6) In this step, the prompt accepts the input along with the context from the previous steps and passes this to the LLM to answer the question: "Based on this context {context} answer this question {input}"
+    // 7) The LLM step appends the answer to the object received and passes it on to the next step in the chain: { context: String, input, answer: "...", ...}
+    // 8) The output of the chain has a property answer now that contains the LLM response.
+
     return chain;
   }
 
