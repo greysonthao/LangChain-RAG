@@ -6,19 +6,22 @@ import path from "node:path";
 import { ChatPromptTemplate } from "@langchain/core/prompts";
 import { createStuffDocumentsChain } from "langchain/chains/combine_documents";
 import { createRetrievalChain } from "langchain/chains/retrieval";
+import { Chroma } from "@langchain/community/vectorstores/chroma"; // <= We need to import Chrome Component
 
 class PdfQA {
 
-  constructor({ model, pdfDocument, chunkSize, chunkOverlap, searchType = "similarity", kDocuments, temperature = 0.8, searchKwargs }) {
+  // Add the new parameter for switching vector stores:
+  constructor({ model, pdfDocument, chunkSize, chunkOverlap, searchType = "similarity", kDocuments, temperature = 0.8, searchKwargs, vectorStoreType = "in-memory" }) {
 
-    this.model        = model;
-    this.pdfDocument  = pdfDocument;
-    this.chunkSize    = chunkSize;
-    this.chunkOverlap = chunkOverlap;
-    this.searchType   = searchType;
-    this.kDocuments   = kDocuments;
-    this.temperature  = temperature;
-    this.searchKwargs = searchKwargs; 
+    this.model           = model;
+    this.pdfDocument     = pdfDocument;
+    this.chunkSize       = chunkSize;
+    this.chunkOverlap    = chunkOverlap;
+    this.searchType      = searchType;
+    this.kDocuments      = kDocuments;
+    this.temperature     = temperature;
+    this.searchKwargs    = searchKwargs; 
+    this.vectorStoreType = vectorStoreType // <= Append to our class
 
   }
 
@@ -59,7 +62,26 @@ class PdfQA {
 
   async createVectorStore(){
     console.log("Creating document embeddings...");
-    this.db = await MemoryVectorStore.fromDocuments(this.texts, this.selectEmbedding);
+
+    if ( this.vectorStoreType === "in-memory" ){
+      this.db = await MemoryVectorStore.fromDocuments(this.texts, this.selectEmbedding);
+    } 
+
+    if ( this.vectorStoreType === "chroma" ){
+
+      // Instantiate a new Chroma Store
+      this.db = new Chroma(this.selectEmbedding, {
+        collectionName: "embeddings-collection",
+        url: "http://localhost:8000", // Optional, will default to this value
+        collectionMetadata: {
+          "hnsw:space": "cosine",
+        }, // Optional, can be used to specify the distance method of the embedding space https://docs.trychroma.com/usage-guide#changing-the-distance-function
+      });
+      // We are adding the document to the vector store:
+      await this.db.addDocuments(this.texts);
+
+    }
+
   }
 
   createRetriever(){
@@ -113,8 +135,11 @@ const pdfQa = await new PdfQA({
 
   // We're switching from plain 'similarity' search to 'Max Marginal Relevance'
   // Read: https://js.langchain.com/v0.2/docs/integrations/vectorstores/memory/#maximal-marginal-relevance
-  searchType: "mmr",
-  searchKwargs: { fetchK: 200, lambda: 0.4 },
+  // We better add a new setting for switching between different vector stores:
+  vectorStoreType: "chroma", // or "in-memory"
+  // ChromaDB does not support Max Marginal Relevance search:
+  // searchType: "mmr",
+  // searchKwargs: { fetchK: 200, lambda: 0.4 },
   kDocuments: 3,
   temperature: 0
 }).init();

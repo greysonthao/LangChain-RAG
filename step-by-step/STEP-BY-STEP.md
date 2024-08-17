@@ -225,7 +225,25 @@
     - [Paul Graham, What I Worked On (Text version)](https://raw.githubusercontent.com/run-llama/llama_index/main/docs/docs/examples/data/paul_graham/paul_graham_essay.txt)
     - [Paul Graham, What I Worked On (Essay)](https://paulgraham.com/worked.html)
 
-## STEP 13: (Work in progress...)
+## STEP 13: Replace InMemory Vector Store with ChromaDB
+
+  - Install dependencies: `npm install`
+    - `chromadb`
+
+  - Install `Docker`
+  - Run Chroma using Docker on your computer:
+    - `docker pull chromadb/chroma`
+    - `docker run -p 8000:8000 chromadb/chroma`
+
+  - Source: `/step-by-step/extras-step-13.js`
+
+  - Run the code: `node step-13.js`
+
+  References and Resources:
+
+  - [LangChain Docs: Chroma](https://js.langchain.com/v0.2/docs/integrations/vectorstores/chroma/)
+
+  - [Getting Started with Chroma](https://docs.trychroma.com/getting-started)
 
 ---
 
@@ -239,7 +257,6 @@
   - Implement saving and loading of embeddings in InMemory Vector store.
 
   - Extra step: [Load Data from Directory](https://js.langchain.com/v0.2/docs/how_to/document_loader_directory/) and allow loading multiple documents. [Ref](https://js.langchain.com/v0.2/docs/integrations/document_loaders/file_loaders/pdf/)
-  - Extra step: switch to `ChromaDB` from `InMemory Vector Store`
   - Extra step: implement [ScoreThresholdRetriever](https://js.langchain.com/v0.2/docs/how_to/parent_document_retriever/#with-score-threshold)
   - Extra step: implement [MaxMarginalRelevanceExampleSelector](https://python.langchain.com/v0.1/docs/modules/model_io/prompts/example_selectors/mmr/)
   - Extra step: use OpenAI LLM and Embeddings model
