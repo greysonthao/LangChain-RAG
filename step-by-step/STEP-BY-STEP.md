@@ -179,8 +179,26 @@
 
   To learn more about how the RecursiveCharacterTextSplitter works and the different strategies that one might pick for particular cases, watch this [excellent explanation](https://www.youtube.com/watch?v=n0uPzvGTFI0).
 
+  Visit this [online app](https://chunkviz.up.railway.app/) to see how different text splitting strategies work.
+
   - Source: `/step-by-step/extras-step-11.js`
 
   - Run the code: `node step-11.js`
 
+## STEP 12: Optimizations: MMR Retriever
 
+  - We are switching from the `all-minilm` Embeddings model to the more powerful `nomic-embed-text` model provided by Ollama. To install the model you must run the following command: `ollama pull nomic-embed-text:latest`
+
+  - We are switching from the default "similarity" to `Maximal Marginal Relevance` (MMR) settings for the retriever. 
+
+  From the [LlamaIndex docs](https://docs.llamaindex.ai/en/stable/examples/vector_stores/SimpleIndexDemoMMR/):
+
+  > "By using maximum marginal relevance, one can iteratively find documents that are dissimilar to previous results."
+
+  From the [docs](https://python.langchain.com/v0.1/docs/modules/model_io/prompts/example_selectors/mmr/):
+
+  > "The Max Marginal Relevance selects examples based on a combination of which examples are most similar to the inputs, while also optimizing for diversity. It does this by finding the examples with the embeddings that have the greatest cosine similarity with the inputs, and then iteratively adding them while penalizing them for closeness to already selected examples."
+  
+  - Source: `/step-by-step/extras-step-12.js`
+
+  - Run the code: `node step-12.js`
