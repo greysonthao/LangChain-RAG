@@ -42,7 +42,7 @@ const pdfQa = await new PdfQA({ model: "llama3", pdfDocument }).init();
 console.log( pdfQa.documents.length ); // 9
 
 // The Document text content:
-console.log( pdfQa.documents[0].pageContent );
+console.log( "\n\nDocument #0 page content: ", pdfQa.documents[0].pageContent );
 
 // The Document metadata:
-console.log( pdfQa.documents[0].metadata );
+console.log( "\n\n Document #0 metadata: ", pdfQa.documents[0].metadata );
