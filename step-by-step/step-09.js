@@ -75,12 +75,13 @@ class PdfQA {
     // const chain = RetrievalQAChain.fromLLM(this.llm, this.retriever);
     // Replace with suggested code: https://v02.api.js.langchain.com/classes/langchain.chains.RetrievalQAChain.html
 
-    // We are using a custom Chat Prompt Template for this one, so that the LLM has a context provided along with our query
+    // We are using a custom Chat Prompt Template for this one, so that the LLM has a context provided along with our query. The Prompt must contain input variable "context", which will be used for passing in the formatted documents to createStuffDocumentsChain below:
     const prompt = ChatPromptTemplate.fromTemplate(`Answer the user's question: {input} based on the following context {context}`);
 
     // Creates a chain that passes a list of documents to a model
     // Ref: https://v02.api.js.langchain.com/functions/langchain.chains_combine_documents.createStuffDocumentsChain.html
     // Source: https://github.com/langchain-ai/langchainjs/blob/3d2aabac1fa876ed908cd751d9afb448692ebbb3/langchain/src/chains/combine_documents/stuff.ts
+    // Prompt requires a {context} variable for this to work.
     const combineDocsChain = await createStuffDocumentsChain({
       llm: this.llm,
       prompt,
