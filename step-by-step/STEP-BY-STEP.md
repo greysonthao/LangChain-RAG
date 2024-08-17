@@ -225,6 +225,8 @@
     - [Paul Graham, What I Worked On (Text version)](https://raw.githubusercontent.com/run-llama/llama_index/main/docs/docs/examples/data/paul_graham/paul_graham_essay.txt)
     - [Paul Graham, What I Worked On (Essay)](https://paulgraham.com/worked.html)
 
+## STEP 13: (Work in progress...)
+
 ---
 
 ## TO BE ADDED:
