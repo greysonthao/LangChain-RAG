@@ -1,9 +1,14 @@
 # Simple RAG pipeline using `LangChain.js`
 
-This repository contains the JavaScript version of the python RAG implementation by **Jodie Burchell**
-as demoed in her [Beyond the Hype: A Realistic Look at Large Language Models](https://www.youtube.com/watch?v=Pv0cfsastFs) GOTO 2024 presentation.
+This repository contains the JavaScript version of the python RAG implementation by **Jodie Burchell** using `LangChain` as demoed in her [Beyond the Hype: A Realistic Look at Large Language Models](https://www.youtube.com/watch?v=Pv0cfsastFs) GOTO 2024 presentation.
 
 - [Original repository](https://github.com/t-redactyl/simple-rag-document-qa) (Make sure to star)
+
+- Here's a [detailed tutorial](https://js.langchain.com/v0.2/docs/tutorials/rag) about building a RAG app from the `LangChain` docs.
+
+![](./assets/RAG.Indexing.png)
+
+![](./assets/RAG.Retrieval.and.Generation.png)
 
 ## Prerequisites
 

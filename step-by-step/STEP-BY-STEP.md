@@ -154,6 +154,12 @@
 
   - Output: you will get an answer along with the number of documents used as context to the LLM's response.
 
+  References and Resources:
+
+  - [Python deprecation notice](https://api.python.langchain.com/en/latest/chains/langchain.chains.retrieval_qa.base.RetrievalQA.html)
+
+  - [Retrieval QA for JS (version 0.1, deprecated)](https://js.langchain.com/v0.1/docs/modules/chains/popular/vector_db_qa_legacy/)
+
 ## STEP 10: Set up memory and use last answer to ask follow up questions / Ask in german
 
   We set up a short-term memory so that the retriever can get some extra content the next time we ask a question. The previous question and related response is passed as context.
@@ -185,7 +191,13 @@
 
   - Run the code: `node step-11.js`
 
-## STEP 12: Optimizations: MMR Retriever
+  References and Resources:
+
+  - [How to recursively split text by characters](https://js.langchain.com/v0.2/docs/how_to/recursive_text_splitter/)
+
+  - [How to Optimize Chunk Size for RAG in Production?](https://pub.towardsai.net/how-to-optimize-chunk-sizes-for-rag-in-production-fae9019796b6)
+
+## STEP 12: Optimizations: MMR Retriever & Better Embeddings Model
 
   - We are switching from the `all-minilm` Embeddings model to the more powerful `nomic-embed-text` model provided by Ollama. To install the model you must run the following command: `ollama pull nomic-embed-text:latest`
 
@@ -202,3 +214,34 @@
   - Source: `/step-by-step/extras-step-12.js`
 
   - Run the code: `node step-12.js`
+
+  References and Resources:
+
+  - [Simple Vector Stores - Maximum Marginal Relevance Retrieval](https://docs.llamaindex.ai/en/stable/examples/vector_stores/SimpleIndexDemoMMR/)
+
+  - [Maximum Marginal Relevance (MMR)](https://community.fullstackretrieval.com/retrieval-methods/maximum-marginal-relevance)
+
+  - **Documents**
+    - [Paul Graham, What I Worked On (Text version)](https://raw.githubusercontent.com/run-llama/llama_index/main/docs/docs/examples/data/paul_graham/paul_graham_essay.txt)
+    - [Paul Graham, What I Worked On (Essay)](https://paulgraham.com/worked.html)
+
+---
+
+## TO BE ADDED:
+
+  - Implement [TextLoader](https://js.langchain.com/v0.2/docs/integrations/document_loaders/file_loaders/text/) / [Ref](https://v02.api.js.langchain.com/classes/langchain.document_loaders_fs_text.TextLoader.html)
+  - Implement custom document loader. [Ref](https://js.langchain.com/v0.2/docs/how_to/document_loader_custom/)
+  - Implement text summarization. [Ref](https://js.langchain.com/v0.2/docs/tutorials/summarization/)
+  - Implement web loaders and test with news sources: [https://lite.cnn.com/](https://lite.cnn.com/)
+  - Create and integrate `Excalidraw` and `Draw.io` diagrams to accompany each step.
+
+  - Extra step: [Load Data from Directory](https://js.langchain.com/v0.2/docs/how_to/document_loader_directory/) and allow loading multiple documents. [Ref](https://js.langchain.com/v0.2/docs/integrations/document_loaders/file_loaders/pdf/)
+  - Extra step: switch to `ChromaDB` from `InMemory Vector Store`
+  - Extra step: implement [ScoreThresholdRetriever](https://js.langchain.com/v0.2/docs/how_to/parent_document_retriever/#with-score-threshold)
+  - Extra step: implement [MaxMarginalRelevanceExampleSelector](https://python.langchain.com/v0.1/docs/modules/model_io/prompts/example_selectors/mmr/)
+  - Extra step: use OpenAI LLM and Embeddings model
+  - Extra step: use Anthropic's Claude
+  - Extra step: use TensorFlow.js Embeddings. [Ref](https://github.com/ollama/ollama/blob/main/docs/tutorials/langchainjs.md)
+  - Extra step: use Retriever filters. [Ref](https://www.reddit.com/r/LangChain/comments/12qn2qi/filter_with_retriever/)
+  - Extra step: use History-aware Retriever. [Ref](https://v02.api.js.langchain.com/functions/langchain.chains_history_aware_retriever.createHistoryAwareRetriever.html)
+  - Extra step: use custom prompts. [Ref](https://smith.langchain.com/hub/rlm/rag-prompt). Example: `const prompt = await pull<ChatPromptTemplate>("rlm/rag-prompt");`
