@@ -177,6 +177,8 @@
 
   > "The recommended TextSplitter is the RecursiveCharacterTextSplitter. This will split documents recursively by different characters - starting with "\n\n", then "\n", then " ". This is nice because it will try to keep all the semantically relevant content in the same place for as long as possible." 
 
+  To learn more about how the RecursiveCharacterTextSplitter works and the different strategies that one might pick for particular cases, watch this [excellent explanation](https://www.youtube.com/watch?v=n0uPzvGTFI0).
+
   - Source: `/step-by-step/extras-step-11.js`
 
   - Run the code: `node step-11.js`
