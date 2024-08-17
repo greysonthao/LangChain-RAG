@@ -65,6 +65,8 @@
 
   - Output: according to the provided `chunkSize` (1000) and `chunkOverlap` (0) settings, you will get 14 text chunks from the text splitter.
 
+  - See how this works through [this online demo](https://chunkviz.up.railway.app/)
+
 ## STEP 06: Vectorize the (split) Documents and add them to the Vector Store
 
   In this step we turn every document into a vector and store it in our in-memory vector store.
