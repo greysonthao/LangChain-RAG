@@ -20,11 +20,6 @@ class PdfQA {
     console.log("Loading model...");
     // Use the Ollama LangChain class to load an LLM
     this.llm = new Ollama({ model: this.model });
-
-    // Test our LLM by 'invoking it' with a question:
-    // this.llm.invoke("What is the capital of Rwanda?")
-    // .then( data => console.log({ data }));
-
   }
 
 }
