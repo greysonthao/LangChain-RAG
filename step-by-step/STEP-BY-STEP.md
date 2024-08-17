@@ -21,6 +21,8 @@
   - Install dependencies: `npm install`
     - `Ollama`
 
+  - Make sure that Ollama is running and that you have downloaded the `llama3` model using: `ollama pull llama3:latest`
+
   - Run the code: `node step-02.js`
 
   - Output: 
