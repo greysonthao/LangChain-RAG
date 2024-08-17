@@ -234,6 +234,7 @@
   - Implement text summarization. [Ref](https://js.langchain.com/v0.2/docs/tutorials/summarization/)
   - Implement web loaders and test with news sources: [https://lite.cnn.com/](https://lite.cnn.com/)
   - Create and integrate `Excalidraw` and `Draw.io` diagrams to accompany each step.
+  - Implement saving and loading of embeddings in InMemory Vector store.
 
   - Extra step: [Load Data from Directory](https://js.langchain.com/v0.2/docs/how_to/document_loader_directory/) and allow loading multiple documents. [Ref](https://js.langchain.com/v0.2/docs/integrations/document_loaders/file_loaders/pdf/)
   - Extra step: switch to `ChromaDB` from `InMemory Vector Store`
