@@ -1,6 +1,6 @@
 # STEP BY STEP
 
-  > Accompanying [YouYube video](https://www.youtube.com/watch?v=INUWI6ZbLwQ&list=PLdo7hJB0agElRmR33xq3x2lTFDaiwqg88&index=2&t=2s)
+  > Accompanying [YouYube video](https://www.youtube.com/watch?v=INUWI6ZbLwQ&list=PLdo7hJB0agElRmR33xq3x2lTFDaiwqg88&index=2)
 
   - Change to the `/step-by-step/` folder and study each step carefully.
 
@@ -10,6 +10,8 @@
 
 ## STEP 01: Create a Class and instantiate it
 
+  > Accompanying [YouYube video](https://www.youtube.com/watch?v=iZESlvAnKLE&list=PLdo7hJB0agElRmR33xq3x2lTFDaiwqg88&index=3)
+
   - Source: `/step-by-step/step-01.js`
 
   - Run the code: `node step-01.js`
@@ -17,6 +19,8 @@
   - Output: `{ pdfQa: PdfQA {} }`
 
 ## STEP 02: Initialize a Language Model
+
+  > Accompanying [YouYube video](https://www.youtube.com/watch?v=ssKeTy1Lc6k&list=PLdo7hJB0agElRmR33xq3x2lTFDaiwqg88&index=3)
 
   - Source: `/step-by-step/step-02.js`
 
@@ -38,6 +42,8 @@
 
 ## STEP 03: Chat with the loaded model
 
+  > Accompanying [YouYube video](https://www.youtube.com/watch?v=WIGRjvVP4-M&list=PLdo7hJB0agElRmR33xq3x2lTFDaiwqg88&index=4)
+
   - Source: `/step-by-step/step-03.js`
 
   - Run the code: `node step-03.js`
@@ -45,6 +51,8 @@
   - Output: `The capital of Zimbabwe is Harare.`
   
 ## STEP 04: Load PDF Document
+
+  > Accompanying [YouYube video](https://www.youtube.com/watch?v=3lW9RcJFMTg&list=PLdo7hJB0agElRmR33xq3x2lTFDaiwqg88&index=5)
 
   - Source: `/step-by-step/step-04.js`
 
@@ -56,6 +64,8 @@
   - Output: the number of documents created from the PDF `pycharm-documentation-mini.pdf` should be 9 according to the default PDFLoader settings. You should also be able to see the text content of the first Document created from the PDF along with the accompanying metadata.
 
 ## STEP 05: Split the Documents created by the PDFLoader into small chunks
+
+  > Accompanying [YouYube video](https://www.youtube.com/watch?v=qSNZeQ2wcPE&list=PLdo7hJB0agElRmR33xq3x2lTFDaiwqg88&index=6)
 
   - Source: `/step-by-step/step-05.js`
 
@@ -70,6 +80,8 @@
   - See how this works through [this online demo](https://chunkviz.up.railway.app/)
 
 ## STEP 06: Vectorize the (split) Documents and add them to the Vector Store
+
+  > Accompanying [YouYube video](https://www.youtube.com/watch?v=-UVvF8L6qyY&list=PLdo7hJB0agElRmR33xq3x2lTFDaiwqg88&index=7)
 
   In this step we turn every document into a vector and store it in our in-memory vector store.
 
@@ -109,6 +121,8 @@
 
 ## STEP 07: Configure a Vector store retriever
 
+  > Accompanying [YouYube video](https://www.youtube.com/watch?v=AYjXZ0YUD6A&list=PLdo7hJB0agElRmR33xq3x2lTFDaiwqg88&index=8)
+
   This component will search the vector store for relevant documents.
 
   - Source: `/step-by-step/step-07.js`
@@ -123,6 +137,8 @@
   ```
 
 ## STEP 08: Create the query => search => results Chain:
+
+  > Accompanying [YouYube video](https://www.youtube.com/watch?v=z-FDZcvKr1w&list=PLdo7hJB0agElRmR33xq3x2lTFDaiwqg88&index=9)
 
   - Source: `/step-by-step/step-08.js`
 
@@ -144,6 +160,8 @@
   ```
 
 ## STEP 09: Replacing legacy RetrievalQAChain
+
+  > Accompanying [YouYube video](https://www.youtube.com/watch?v=i0daoBdB7NE&list=PLdo7hJB0agElRmR33xq3x2lTFDaiwqg88&index=10)
 
   According to the official documentation, the legacy `RetrievalQAChain` class is deprecated as of version 2.x and will be completely removed in the upcoming 3.x version.
 
@@ -167,6 +185,8 @@
   - [Retrieval QA for JS (version 0.1, deprecated)](https://js.langchain.com/v0.1/docs/modules/chains/popular/vector_db_qa_legacy/)
 
 ## STEP 10: Set up memory and use last answer to ask follow up questions / Ask in german
+
+  > Accompanying [YouYube video](https://www.youtube.com/watch?v=NE2gl94CxLU&list=PLdo7hJB0agElRmR33xq3x2lTFDaiwqg88&index=11)
 
   We set up a short-term memory so that the retriever can get some extra content the next time we ask a question. The previous question and related response is passed as context.
 
