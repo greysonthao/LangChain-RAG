@@ -1,5 +1,7 @@
 # STEP BY STEP
 
+  > Accompanying [YouYube video](https://www.youtube.com/watch?v=INUWI6ZbLwQ&list=PLdo7hJB0agElRmR33xq3x2lTFDaiwqg88&index=2&t=2s)
+
   - Change to the `/step-by-step/` folder and study each step carefully.
 
   - `cd step-by-step/`
