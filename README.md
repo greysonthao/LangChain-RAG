@@ -12,7 +12,7 @@ This repository contains the JavaScript version of the python RAG implementation
 
 ## Prerequisites
 
-If you intend to use a local LLM through Ollama, you will need to install [Ollama](https://ollama.com/) and the [llama3 LLM model](https://ollama.com/library/llama3) via Ollama. You will also need to install the [all-minilm](https://ollama.com/library/all-minilm) embeddings model, also via Ollama.
+If you intend to use a local LLM through Ollama, you will need to install [Ollama](https://ollama.com/) and the [llama3 LLM model](https://ollama.com/library/llama3) via Ollama. You will also need to install the [all-minilm](https://ollama.com/library/all-minilm) embeddings model, also via Ollama. Additionally, ensure you have Node.js version 20 or higher installed.
 
 To ensure that you have successfully downloaded and installed all of the above, run the following commands through your terminal:
 
@@ -20,7 +20,9 @@ To ensure that you have successfully downloaded and installed all of the above, 
 
 - Check whether the required models are available: `ollama list`
 
-## Key differences between the [original python repository](https://github.com/t-redactyl/simple-rag-document-qa/tree/main) and the JavaScript version 
+- Check your Node.js version: `node --version`
+
+## Key differences between the [original python repository](https://github.com/t-redactyl/simple-rag-document-qa/tree/main) and the JavaScript version
 
 - This is **not** a Jupyter Notebook.
 
@@ -32,7 +34,7 @@ To ensure that you have successfully downloaded and installed all of the above, 
 
 - The original code used the `CharacterSplitter` for splitting the PDF documents, whereas this repo contains a variation using the `RecursiveCharacterTextSplitter`.
 
-- The original repo contains a large PDF (pycharm-documentation.pdf which is around 174MB) that is used in the demo. This is a great source to test and also compare the results with the demo, but it turns out that it takes quite a lot of time to get vectorized. For testing purposes and making the process faster of vectorizing faster, especially in the case of the In-memory vector database which gets deleted every time the program gets restarted, a second smaller version of the original file has been added to the `/materials` folder. The file is called `pycharm-documentation-mini.pdf`, it's just 743KB and contains the first 10 pages of the original PDF. 
+- The original repo contains a large PDF (pycharm-documentation.pdf which is around 174MB) that is used in the demo. This is a great source to test and also compare the results with the demo, but it turns out that it takes quite a lot of time to get vectorized. For testing purposes and making the process faster of vectorizing faster, especially in the case of the In-memory vector database which gets deleted every time the program gets restarted, a second smaller version of the original file has been added to the `/materials` folder. The file is called `pycharm-documentation-mini.pdf`, it's just 743KB and contains the first 10 pages of the original PDF.
 
 - Another PDF has been added for further testing. The file can be found in the `/materials` folder and it's named `MetaPrivacyPolicy.pdf`. It's around 4MB and contains the Meta's privacy policy as of 2024.
 
@@ -51,9 +53,9 @@ This repository contains the following material:
 
 **JavaScript Branch:**
 
-* `rag-pdf-qa.js` contains the code for the simple RAG pipeline. There are extensive comments in the code to help you understand how to adapt this for your own use case.
-* `talk-materials/talk-sources.md` contains all of the papers and other sources Jodie Burchell used for her talk. It also contains all of her image credits.
-* `talk-materials/beyond-the-hype.pdf` contains a copy of her slides.
+- `rag-pdf-qa.js` contains the code for the simple RAG pipeline. There are extensive comments in the code to help you understand how to adapt this for your own use case.
+- `talk-materials/talk-sources.md` contains all of the papers and other sources Jodie Burchell used for her talk. It also contains all of her image credits.
+- `talk-materials/beyond-the-hype.pdf` contains a copy of her slides.
 
 ---
 
@@ -61,7 +63,6 @@ The repo contains the following materials for Jodie Burchell's talk delivered at
 
 **[Python Branch](https://github.com/in-tech-gration/simple-rag-document-qa/tree/python-original):**
 
-* `/notebooks/rag-pdf-qa.ipynb` contains the code for the simple python RAG pipeline she demoed during the talk. There are extensive notes in Markdown in this notebook to help you understand how to adapt this for your own use case.
-* `talk-materials/talk-sources.md` contains all of the papers and other sources she used for her talk. It also contains all of her image credits.
-* `talk-materials/beyond-the-hype.pdf` contains a copy of her slides.
-
+- `/notebooks/rag-pdf-qa.ipynb` contains the code for the simple python RAG pipeline she demoed during the talk. There are extensive notes in Markdown in this notebook to help you understand how to adapt this for your own use case.
+- `talk-materials/talk-sources.md` contains all of the papers and other sources she used for her talk. It also contains all of her image credits.
+- `talk-materials/beyond-the-hype.pdf` contains a copy of her slides.
